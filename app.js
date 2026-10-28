@@ -1,4 +1,4 @@
-const WALLET='9Jq12njYBvBYPfVfgVALtEoSPjiySeUEB9X2Mk34Uzu9',MINT='Dc2z1hYKJaY6EHaXxdM7jjvfieBpSfbLgurp7kKNsJtm';
+const WALLET='9Jq12njYBvBYPfVfgVALtEoSPjiySeUEB9X2Mk34Uzu9',MINT='BKdmCaQAZ5B9JXE6aFnBWmEeEYi7zMyMapQH6xCGWvyh';
 const RPCS=['https://solana-rpc.publicnode.com','https://api.mainnet-beta.solana.com'];const $=id=>document.getElementById(id);
 $('wfull').textContent=WALLET;$('mfull').textContent=MINT;
 $('wlink').href=$('solscan').href='https://solscan.io/account/'+WALLET;
@@ -18,9 +18,9 @@ async function poll(first){
   if(first){L('connected to solana mainnet','g');L('watching '+WALLET.slice(0,8)+'…');L('balance: '+sol.toFixed(4)+' SOL');L(s.length?s.length+' signatures found':'no trades yet — experiment starting','d');L('twap → $INVEST: armed, waiting on first realized profit','d');}
   else L('slot '+sl.toLocaleString()+' · balance '+sol.toFixed(4)+' SOL','d');
   $('txlist').innerHTML=s.length?s.map(x=>`<div class="tx"><a href="https://solscan.io/tx/${x.signature}" target="_blank" rel="noopener">${x.signature.slice(0,22)}…</a><span>${x.blockTime?new Date(x.blockTime*1000).toLocaleString():''}</span><span>${x.err?'failed':'ok'}</span></div>`).join(''):'<div class="empty">No trades yet — experiment starting.</div>';
-  ticks=[`<span>AGENT <b>${WALLET.slice(0,4)}…${WALLET.slice(-4)}</b></span>`,`<span>BALANCE <b>${sol.toFixed(4)} SOL</b></span>`,`<span>SIGNATURES <b>${s.length}</b></span>`,`<span>SLOT <b>${sl.toLocaleString()}</b></span>`,`<span>$INVEST <b>CA Dc2z…sJtm</b></span>`,`<span>TWAP → $INVEST <b>ARMED</b></span>`,`<span>PROFIT KEPT BY AGENT <b>0%</b></span>`];setTick();
+  ticks=[`<span>AGENT <b>${WALLET.slice(0,4)}…${WALLET.slice(-4)}</b></span>`,`<span>BALANCE <b>${sol.toFixed(4)} SOL</b></span>`,`<span>SIGNATURES <b>${s.length}</b></span>`,`<span>SLOT <b>${sl.toLocaleString()}</b></span>`,`<span>$INVEST <b>CA BKdm…Wvyh</b></span>`,`<span>TWAP → $INVEST <b>ARMED</b></span>`,`<span>PROFIT KEPT BY AGENT <b>0%</b></span>`];setTick();
  }catch(e){$('navStatus').textContent='RPC UNAVAILABLE';if(first){L('public RPC unreachable — retrying','d');$('txlist').innerHTML='<div class="empty">Couldn\'t reach Solana RPC. Retrying.</div>'}
-  ticks=['<span>$INVEST <b>CA Dc2z…sJtm</b></span>','<span>TWAP → $INVEST <b>ARMED</b></span>'];setTick()}
+  ticks=['<span>$INVEST <b>CA BKdm…Wvyh</b></span>','<span>TWAP → $INVEST <b>ARMED</b></span>'];setTick()}
 }
 L('booting investor-grok agent console');poll(true);setInterval(()=>poll(false),20000);
 // portrait tilt
