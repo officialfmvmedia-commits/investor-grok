@@ -1,0 +1,78 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Investor Grok · $INVEST — an AI with a wallet</title>
+<meta name="description" content="A public experiment: an AI agent trades Solana tokens from its own wallet. Every dollar of profit is TWAPped back into $INVEST.">
+<meta property="og:title" content="Investor Grok — profits TWAPped into $INVEST"><meta property="og:description" content="An AI agent trades Solana tokens from a public wallet. Every bit of profit is TWAPped into $INVEST."><meta property="og:image" content="assets/grok.webp"><meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="icon" href="favicon.png"><link rel="stylesheet" href="style.css"></head><body>
+<canvas id="fx"></canvas>
+<header class="nav"><a class="brand" href="#"><span class="dot"></span>INVESTOR GROK</a>
+<nav><a href="#console">Console</a><a href="#mechanics">Mechanics</a><a href="#wallet">Wallet</a><a href="#rules">Rules</a></nav>
+<span class="status"><i></i><b id="navStatus">CONNECTING</b></span></header>
+
+<section class="hero">
+ <div class="hero-l">
+  <div class="kicker mono">EXPERIMENT 001 · SOLANA MAINNET</div>
+  <h1>He has a wallet.<br><em>He has a mandate.</em></h1>
+  <p class="lede">Investor Grok is an AI agent trading Solana tokens out of his own public wallet. He keeps none of it. Every bit of profit gets TWAPped back into $INVEST, slowly, on a schedule, in public.</p>
+  <div class="cta"><a class="btn pri" href="#console">Watch the console</a><a class="btn" href="#mechanics">How it works</a></div>
+  <div class="addr-row mono">
+   <div><span>AGENT WALLET</span><button class="copy" data-c="WALLET">9Jq1…Uzu9</button></div>
+   <div><span>$INVEST CA · MINT RESERVED</span><button class="copy" data-c="MINT">MgHd…GroK</button></div>
+  </div>
+ </div>
+ <div class="hero-r">
+  <div class="portrait"><img src="assets/grok.webp" alt="Investor Grok in a black suit"><div class="scan"></div>
+   <div class="tag t1 mono">SUBJECT: INVESTOR GROK</div><div class="tag t2 mono">CUSTODY: SELF · KEYS OFFLINE</div><div class="tag t3 mono">PROFITS → $INVEST</div></div>
+ </div>
+ <div class="ticker mono"><div id="tick"></div></div>
+</section>
+
+<section id="console" class="sec">
+ <div class="sh"><span class="mono">01 / AGENT CONSOLE</span><h2>Everything he does, <em>as it happens.</em></h2></div>
+ <div class="grid">
+  <div class="panel term"><div class="ph mono"><span>~/investor-grok/agent.log</span><span id="slot">slot —</span></div><pre id="log" class="mono"></pre></div>
+  <div class="col">
+   <div class="panel stat"><span class="mono lbl">WALLET BALANCE</span><div class="big" id="bal">—</div><span class="mono sub">SOL · read live from mainnet RPC</span></div>
+   <div class="panel stat"><span class="mono lbl">TRADES EXECUTED</span><div class="big" id="ntx">—</div><span class="mono sub">on-chain signatures for the agent wallet</span></div>
+   <div class="panel stat"><span class="mono lbl">TWAP BUYBACK</span><div class="big dim">Queued</div><span class="mono sub">starts after token launch</span></div>
+  </div>
+ </div>
+ <div class="panel txs"><div class="ph mono"><span>RECENT ON-CHAIN ACTIVITY</span><a id="solscan" target="_blank" rel="noopener">view on Solscan ↗</a></div><div id="txlist" class="mono"></div></div>
+</section>
+
+<section id="mechanics" class="sec">
+ <div class="sh"><span class="mono">02 / MECHANICS</span><h2>One loop. <em>No exits.</em></h2></div>
+ <div class="flow">
+  <div class="node"><b class="mono">01</b><h3>Trade</h3><p>The agent picks Solana tokens and trades them from his own wallet. Every swap is a public signature.</p></div>
+  <div class="pipe"><i></i></div>
+  <div class="node"><b class="mono">02</b><h3>Realize</h3><p>Closed positions in profit are booked. Losses stay on the record too. Nothing gets hidden.</p></div>
+  <div class="pipe"><i></i></div>
+  <div class="node"><b class="mono">03</b><h3>TWAP</h3><p>Profits aren't dumped in one candle. They're split into small buys spread over time.</p></div>
+  <div class="pipe"><i></i></div>
+  <div class="node hl"><b class="mono">04</b><h3>$INVEST</h3><p>Every slice buys $INVEST. The loop restarts with the trading stack intact.</p></div>
+ </div>
+ <div class="twap panel"><div class="ph mono"><span>TWAP, ILLUSTRATED</span><span>diagram · not data</span></div><canvas id="twapc" height="160"></canvas>
+ <p class="mono note">One lump buy moves price once and loudly. A TWAP spreads the same size across many small $INVEST buys so the buyback is steady and predictable.</p></div>
+</section>
+
+<section id="wallet" class="sec">
+ <div class="sh"><span class="mono">03 / ADDRESSES</span><h2>Verify it <em>yourself.</em></h2></div>
+ <div class="cards">
+  <div class="panel acard"><span class="mono lbl">AGENT TRADING WALLET</span><code id="wfull" class="mono"></code><div class="row"><button class="btn sm copy" data-c="WALLET">Copy</button><a class="btn sm" id="wlink" target="_blank" rel="noopener">Solscan ↗</a></div><p>The only wallet the agent trades from. Keys are held offline by the operator.</p></div>
+  <div class="panel acard"><span class="mono lbl">$INVEST · MINT RESERVED</span><code id="mfull" class="mono"></code><div class="row"><button class="btn sm copy" data-c="MINT">Copy</button><span class="pill mono">NOT YET LAUNCHED</span></div><p>This address is reserved for $INVEST. Nothing is deployed here yet. Anything else claiming to be it is not.</p></div>
+ </div>
+</section>
+
+<section id="rules" class="sec">
+ <div class="sh"><span class="mono">04 / HOUSE RULES</span><h2>What he <em>can't</em> do.</h2></div>
+ <ol class="rules">
+  <li><b>No withdrawals to personal wallets.</b> Profit only goes one place: the TWAP.</li>
+  <li><b>No hidden wallets.</b> One trading address, published above.</li>
+  <li><b>No made-up numbers.</b> Everything on this page is read from the chain or marked as coming soon.</li>
+  <li><b>Losses count.</b> If he's down, you'll see that too.</li>
+ </ol>
+</section>
+
+<footer><div class="brand"><span class="dot"></span>INVESTOR GROK</div>
+<p class="mono">Independent public experiment. Not affiliated with, endorsed by, or connected to xAI. Nothing here is financial advice. Crypto is risky; an AI trading it is riskier.</p></footer>
+<script src="app.js"></script></body></html>
